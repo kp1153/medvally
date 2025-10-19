@@ -14,8 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Best Medical Services",
-  description: "Provided by medvally",
+  title: "MedValley - World-Class Healthcare in India | Medical Tourism",
+  description:
+    "MedValley Pvt. Ltd connects international patients with top-tier hospitals and expert doctors in India. Comprehensive medical tourism services since 2016.",
 };
 
 export default function RootLayout({ children }) {
@@ -25,7 +26,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar />
-        <main>{children}</main>
+        {children}
         <Footer />
       </body>
     </html>
