@@ -5,14 +5,14 @@ import HeroBanner from "@/components/HeroBanner";
 import AboutUs from "@/components/AboutUs";
 import Hospitals from "@/components/Hospitals";
 import Specialities from "@/components/Specialities";
-import Doctors from "@/components/Doctors"; // ✅ NEW IMPORT
+import Doctors from "@/components/Doctors";
+import CostEstimate from "@/components/CostEstimate"; // ✅ Added
 import PatientStories from "@/components/PatientStories";
 import HealthTips from "@/components/HealthTips";
 import Contact from "@/components/Contact";
 import { useEffect } from "react";
 
 export default function Home() {
-  // Smooth scroll fix
   useEffect(() => {
     const handleHashScroll = () => {
       if (window.location.hash) {
@@ -27,7 +27,6 @@ export default function Home() {
         }
       }
     };
-
     handleHashScroll();
     window.addEventListener("hashchange", handleHashScroll);
     return () => window.removeEventListener("hashchange", handleHashScroll);
@@ -40,7 +39,8 @@ export default function Home() {
       <AboutUs />
       <Hospitals />
       <Specialities />
-      <Doctors /> {/* ✅ NEW SECTION */}
+      <Doctors />
+      <CostEstimate /> {/* ✅ Added section */}
       <PatientStories />
       <HealthTips />
       <Contact />
