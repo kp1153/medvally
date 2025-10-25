@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 export default function AboutUs() {
   return (
@@ -8,12 +8,13 @@ export default function AboutUs() {
           About Us
         </h2>
         <p className="text-gray-700 text-lg leading-relaxed text-center">
-          Medvalley is a trusted medical tourism company in India helping patients from
-          the Middle East, Africa, and CIS countries get the best medical treatment in
-          India at affordable costs. We connect you with **NABH & JCI accredited hospitals**
-          and **top specialist doctors** across India. From treatment planning to visa
-          assistance, airport pickup, medical appointments and follow-up – we support you
-          at every step.
+          Medvalley is a trusted medical tourism company in India helping
+          patients from the Middle East, Africa, and CIS countries get the best
+          medical treatment in India at affordable costs. We connect you with
+          **NABH & JCI accredited hospitals** and **top specialist doctors**
+          across India. From treatment planning to visa assistance, airport
+          pickup, medical appointments and follow-up – we support you at every
+          step.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center mt-10">
           <div className="p-6 shadow-lg rounded-lg border-t-4 border-blue-600">
