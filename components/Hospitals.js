@@ -1,242 +1,180 @@
 "use client";
+import { useState } from "react";
+
+const hospitalData = {
+  Delhi: [
+    "AIIMS Delhi",
+    "Apollo Hospital Delhi",
+    "Fortis Escorts Heart Institute",
+    "BLK-Max Super Specialty Hospital",
+    "Sir Ganga Ram Hospital",
+    "Max Super Specialty Saket",
+    "Indraprastha Apollo Hospital",
+    "Venkateshwar Hospital",
+  ],
+  Gurugram: [
+    "Medanta The Medicity",
+    "Artemis Hospital",
+    "Fortis Memorial Research Institute",
+    "Paras Hospital",
+    "Max Hospital Gurgaon",
+    "CK Birla Hospital",
+  ],
+  Noida: [
+    "Jaypee Hospital",
+    "Fortis Noida",
+    "Kailash Hospital",
+    "Metro Hospital",
+    "Apollo Spectra",
+  ],
+  Faridabad: [
+    "Asian Institute of Medical Sciences",
+    "Sarvodaya Hospital",
+    "Fortis Escorts Faridabad",
+    "Metro Hospital Faridabad",
+  ],
+  Chandigarh: [
+    "Max Super Specialty Mohali",
+    "Fortis Mohali",
+    "Ivy Hospital",
+    "Healing Hospital",
+  ],
+  Ludhiana: [
+    "Dayanand Medical College Hospital",
+    "Fortis Ludhiana",
+    "SPS Hospitals",
+    "Christian Medical College",
+  ],
+  Mumbai: [
+    "Lilavati Hospital",
+    "Kokilaben Dhirubhai Ambani Hospital",
+    "Nanavati Hospital",
+    "Hinduja Hospital",
+    "Tata Memorial Hospital",
+  ],
+  Pune: [
+    "Ruby Hall Clinic",
+    "Jehangir Hospital",
+    "Sahyadri Hospitals",
+    "Manipal Hospital Pune",
+  ],
+  Bangalore: [
+    "Narayana Health",
+    "Manipal Hospital",
+    "Fortis Bannerghatta",
+    "Aster CMI",
+    "Apollo Bangalore",
+  ],
+  Chennai: [
+    "Apollo Hospital Chennai",
+    "MIOT Hospital",
+    "Fortis Malar",
+    "SIMS Hospital",
+    "Gleneagles Global",
+  ],
+  Hyderabad: [
+    "Yashoda Hospitals",
+    "Care Hospitals",
+    "KIMS",
+    "AIG Hospitals",
+    "Continental Hospitals",
+  ],
+  Kolkata: [
+    "AMRI Hospital",
+    "Apollo Gleneagles",
+    "Fortis Kolkata",
+    "RN Tagore Hospital",
+  ],
+  Ahmedabad: [
+    "Shalby Hospital",
+    "Apollo Ahmedabad",
+    "CIMS Hospital",
+    "Sterling Hospital",
+  ],
+  Jaipur: [
+    "Mahatma Gandhi Medical College",
+    "Fortis Jaipur",
+    "CK Birla Hospital Jaipur",
+    "Manipal Hospital Jaipur",
+  ],
+  Kochi: [
+    "Aster Medcity",
+    "Lakeshore Hospital",
+    "Amrita Hospital",
+    "Renai Medicity",
+  ],
+  Varanasi: ["Kashi Panchakarma Hospital"],
+};
 
 export default function Hospitals() {
+  const [city, setCity] = useState("");
+  const [hospital, setHospital] = useState("");
+  const [result, setResult] = useState("");
+
+  const handleSearch = () => {
+    if (!city || !hospital)
+      return alert("Please select both city and hospital.");
+    setResult(`${hospital}, ${city}`);
+  };
+
   return (
-    <section id="hospitals" className="py-16 px-6 bg-gray-50">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-center text-indigo-700 mb-6">
-          Our Partner Hospitals
-        </h2>
-        <p className="text-gray-700 text-center text-lg mb-10 max-w-4xl mx-auto">
-          We primarily collaborate with India's most prestigious hospitals known for their cutting-edge technology, internationally trained specialists, and proven track record in medical tourism. These partnerships ensure our patients receive priority appointments, transparent pricing, and dedicated international patient care. However, based on your specific medical needs and preferences, we can also explore other excellent healthcare facilities across the country to find the perfect match for your treatment.
-        </p>
+    <section id="hospitals" className="py-12 px-6 bg-gray-50">
+      <h2 className="text-3xl font-bold text-center mb-4 text-indigo-700">
+        Choose the right hospital for you
+      </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">Apollo Hospital</h3>
-            <p className="text-gray-600 text-sm mt-2">
-              Mumbai, Delhi, Chennai, Kolkata, Ahmedabad
-            </p>
-          </div>
+      <div className="flex flex-col md:flex-row justify-center gap-4 mb-6">
+        <select
+          className="border px-4 py-2 rounded"
+          value={city}
+          onChange={(e) => {
+            setCity(e.target.value);
+            setHospital("");
+          }}
+        >
+          <option value="">Select City</option>
+          {Object.keys(hospitalData).map((c) => (
+            <option key={c} value={c}>
+              {c}
+            </option>
+          ))}
+        </select>
 
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">Fortis Hospital</h3>
-            <p className="text-gray-600 text-sm mt-2">
-              Mumbai, Delhi, Gurugaon, Noida, Faridabad, Bangalore, Chennai,
-              Kolkata
-            </p>
-          </div>
+        <select
+          className="border px-4 py-2 rounded"
+          value={hospital}
+          onChange={(e) => setHospital(e.target.value)}
+          disabled={!city}
+        >
+          <option value="">Select Hospital</option>
+          {city &&
+            hospitalData[city].map((h) => (
+              <option key={h} value={h}>
+                {h}
+              </option>
+            ))}
+        </select>
 
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">
-              Max Super Speciality Hospital
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">Delhi, Gurugaon, Noida</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">
-              Medanta - The Medicity
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">Gurugaon, Varanasi</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">
-              Manipal Hospital
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">Bangalore</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">
-              Narayana Health City
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">Bangalore</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">
-              Artemis Hospital
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">Gurugaon</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">
-              Sir Ganga Ram Hospital
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">Delhi</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">
-              BLK Super Speciality Hospital
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">Delhi</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">
-              Indraprastha Apollo Hospital
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">Delhi</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">Paras Hospital</h3>
-            <p className="text-gray-600 text-sm mt-2">Gurugaon</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">Jaypee Hospital</h3>
-            <p className="text-gray-600 text-sm mt-2">Noida</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">Metro Hospital</h3>
-            <p className="text-gray-600 text-sm mt-2">Noida, Faridabad</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">
-              Sarvodaya Hospital
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">Faridabad</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">
-              Kokilaben Dhirubhai Ambani Hospital
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">Mumbai</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">
-              Lilavati Hospital
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">Mumbai</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">
-              Breach Candy Hospital
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">Mumbai</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">Jaslok Hospital</h3>
-            <p className="text-gray-600 text-sm mt-2">Mumbai</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">
-              Columbia Asia Hospital
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">Bangalore</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">
-              MIOT International
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">Chennai</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">
-              Kauvery Hospital
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">Chennai</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">AMRI Hospital</h3>
-            <p className="text-gray-600 text-sm mt-2">Kolkata</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">
-              Medica Superspecialty Hospital
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">Kolkata</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">
-              Krishna Shalby Hospital
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">Ahmedabad</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">
-              Sterling Hospital
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">Ahmedabad</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">Zydus Hospital</h3>
-            <p className="text-gray-600 text-sm mt-2">Ahmedabad</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">SAL Hospital</h3>
-            <p className="text-gray-600 text-sm mt-2">Ahmedabad</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">CIMS Hospital</h3>
-            <p className="text-gray-600 text-sm mt-2">Ahmedabad</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">
-              Heritage Hospital
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">Varanasi</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">
-              Marwari Hospital
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">Varanasi</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">Shiv Hospital</h3>
-            <p className="text-gray-600 text-sm mt-2">Varanasi</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">
-              Mahavir Hospital
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">Surat</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">Kiran Hospital</h3>
-            <p className="text-gray-600 text-sm mt-2">Surat</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">Apex Hospital</h3>
-            <p className="text-gray-600 text-sm mt-2">Surat</p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h3 className="text-lg font-bold text-zinc-900">
-              Sunshine Global Hospital
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">Surat</p>
-          </div>
-        </div>
+        <button
+          onClick={handleSearch}
+          className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-2 rounded"
+        >
+          🔍 Search
+        </button>
       </div>
+
+      {result && (
+        <div className="text-center bg-white shadow p-4 rounded">
+          <h3 className="text-lg font-semibold">{result}</h3>
+          <a
+            href="https://wa.me/919523534038"
+            target="_blank"
+            className="inline-block mt-3 bg-green-500 text-white px-4 py-2 rounded shadow"
+          >
+            💬 Chat on WhatsApp
+          </a>
+        </div>
+      )}
     </section>
   );
 }

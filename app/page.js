@@ -1,11 +1,9 @@
 "use client";
-
-import LeadForm from "@/components/LeadForm";
 import HeroBanner from "@/components/HeroBanner";
+import LeadForm from "@/components/LeadForm";
 import AboutUs from "@/components/AboutUs";
 import Hospitals from "@/components/Hospitals";
 import Specialities from "@/components/Specialities";
-import Doctors from "@/components/Doctors";
 import CostEstimate from "@/components/CostEstimate"; // ✅ Added
 import PatientStories from "@/components/PatientStories";
 import HealthTips from "@/components/HealthTips";
@@ -34,12 +32,11 @@ export default function Home() {
 
   return (
     <>
-      <LeadForm />
       <HeroBanner />
+      <LeadForm />
       <AboutUs />
       <Hospitals />
       <Specialities />
-      <Doctors />
       <CostEstimate /> {/* ✅ Added section */}
       <PatientStories />
       <HealthTips />
