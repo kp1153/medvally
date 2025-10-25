@@ -1,49 +1,83 @@
-'use client';
+"use client";
+import { useEffect } from "react";
 
 export default function Navbar() {
+
+  // Load Google Translate Script
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src =
+      "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+    document.body.appendChild(script);
+
+    window.googleTranslateElementInit = () => {
+      new window.google.translate.TranslateElement(
+        {
+          pageLanguage: "en",
+          includedLanguages: "en,ar,ru,fr,bn,fa",
+          autoDisplay: false,
+        },
+        "google_translate_element"
+      );
+    };
+  }, []);
+
+  // Force Language Switch + RTL Support
+  const changeLanguage = (lang) => {
+    const applyLang = () => {
+      const select = document.querySelector(".goog-te-combo");
+      if (select) {
+        select.value = lang;
+        select.dispatchEvent(new Event("change"));
+
+        // RTL Layout for Arabic & Persian
+        if (lang === "ar" || lang === "fa") {
+          document.body.dir = "rtl";
+        } else {
+          document.body.dir = "ltr";
+        }
+      } else {
+        setTimeout(applyLang, 300);
+      }
+    };
+    applyLang();
+  };
+
   return (
     <>
-      {/* Branding Bar */}
-      <div className="flex flex-col sm:flex-row items-center justify-between px-6 py-5 bg-white border-b shadow-sm">
-        <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-teal-400 to-indigo-600 flex items-center justify-center shadow-lg">
-            <img src="/logo.jpg" alt="Medvalley logo" className="w-12 h-12 object-cover rounded-md" />
-          </div>
+      <div id="google_translate_element" style={{ display: "none" }}></div>
+
+      <header className="flex flex-col sm:flex-row items-center justify-between px-6 py-4 bg-white shadow">
+        {/* Logo */}
+        <div className="flex items-center gap-3">
+          <img src="/logo.jpg" alt="Medvalley" className="w-14 h-14 rounded-full shadow" />
           <div>
-            <h1 className="text-indigo-800 text-2xl font-extrabold tracking-tight">Medvalley</h1>
-            <p className="text-teal-700 text-sm font-semibold">International Healthcare, Indian Hospitality</p>
+            <h1 className="text-xl font-bold text-indigo-700">Medvalley</h1>
+            <p className="text-sm text-teal-600">International Healthcare, Indian Hospitality</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-3 mt-4 sm:mt-0">
-          <button className="px-4 py-1 rounded text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 shadow">
-            EN
-          </button>
-          <button className="px-4 py-1 rounded text-sm font-bold text-white bg-teal-600 hover:bg-teal-700 shadow">
-            AR
-          </button>
-
-          <a
-            href="https://wa.me/919523534038"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow"
-          >
-            WhatsApp Us
-          </a>
+        {/* Language Buttons */}
+        <div className="flex gap-2 mt-3 sm:mt-0">
+          <button onClick={() => changeLanguage("en")} className="px-2 font-semibold text-gray-700 hover:text-indigo-700">EN</button>
+          <button onClick={() => changeLanguage("ar")} className="px-2 font-semibold text-gray-700 hover:text-indigo-700">AR</button>
+          <button onClick={() => changeLanguage("ru")} className="px-2 font-semibold text-gray-700 hover:text-indigo-700">RU</button>
+          <button onClick={() => changeLanguage("fr")} className="px-2 font-semibold text-gray-700 hover:text-indigo-700">FR</button>
+          <button onClick={() => changeLanguage("bn")} className="px-2 font-semibold text-gray-700 hover:text-indigo-700">BN</button>
+          <button onClick={() => changeLanguage("fa")} className="px-2 font-semibold text-gray-700 hover:text-indigo-700">FA</button>
         </div>
-      </div>
+      </header>
 
-      {/* Navigation */}
-      <nav className="flex flex-wrap justify-center gap-6 px-4 py-4 bg-white border-b">
-        <a href="#home" className="text-teal-700 hover:underline font-semibold">Home</a>
-        <a href="#treatments" className="text-indigo-700 hover:underline font-semibold">Treatments</a>
-        <a href="#hospitals" className="text-teal-700 hover:underline font-semibold">Hospitals</a>
-        <a href="#doctors" className="text-indigo-700 hover:underline font-semibold">Doctors</a>
-        <a href="#cost" className="text-pink-700 hover:underline font-semibold">Cost Estimate</a>
-        <a href="#patient-stories" className="text-indigo-700 hover:underline font-semibold">Patient Stories</a>
-        <a href="#about" className="text-teal-700 hover:underline font-semibold">About Us</a>
-        <a href="#contact" className="text-indigo-700 hover:underline font-semibold">Contact</a>
+      {/* Navigation Menu */}
+      <nav className="flex flex-wrap justify-center gap-6 py-3 bg-gray-50 border-t">
+        <a href="#home" className="text-indigo-700 font-medium hover:underline">Home</a>
+        <a href="#treatments" className="text-teal-700 font-medium hover:underline">Treatments</a>
+        <a href="#hospitals" className="text-indigo-700 font-medium hover:underline">Hospitals</a>
+        <a href="#doctors" className="text-teal-700 font-medium hover:underline">Doctors</a>
+        <a href="#cost" className="text-indigo-700 font-medium hover:underline">Cost Estimate</a>
+        <a href="#patient-stories" className="text-teal-700 font-medium hover:underline">Patient Stories</a>
+        <a href="#about" className="text-indigo-700 font-medium hover:underline">About Us</a>
+        <a href="#contact" className="text-teal-700 font-medium hover:underline">Contact</a>
       </nav>
     </>
   );
