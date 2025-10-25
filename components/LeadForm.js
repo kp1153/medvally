@@ -25,24 +25,24 @@ export default function LeadForm() {
             type="text"
             required
             placeholder="Full Name"
-            className="w-full border-2 border-amber-900 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="w-full border-2 border-amber-900 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-pink-600 placeholder:text-pink-400"
           />
           <input
             type="tel"
             required
             placeholder="WhatsApp Number"
-            className="w-full border-2 border-amber-900 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="w-full border-2 border-amber-900 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-pink-600 placeholder:text-pink-400"
           />
           <input
             type="email"
             required
             placeholder="Email Address"
-            className="w-full border-2 border-amber-900 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="w-full border-2 border-amber-900 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-pink-600 placeholder:text-pink-400"
           />
           <textarea
             rows="3"
             placeholder="Your Medical Requirement"
-            className="w-full border-2 border-amber-900 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="w-full border-2 border-amber-900 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-pink-600 placeholder:text-pink-400"
           ></textarea>
           <button
             type="submit"
