@@ -4,9 +4,12 @@ export default function Specialities() {
   return (
     <section id="treatments" className="py-16 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-center text-indigo-700 mb-10">
-          Medical Specialities
+        <h2 className="text-3xl font-bold text-center text-indigo-700 mb-6">
+          Medical Treatments We Facilitate
         </h2>
+        <p className="text-gray-700 text-center text-lg mb-10 max-w-4xl mx-auto">
+          As a leading medical tourism company, we specialize in connecting international patients with world-class treatment options across India. Our expertise spans multiple medical specialities, ensuring you receive the best care at affordable costs. From initial consultation to post-treatment follow-up, we guide you through every step of your healing journey.
+        </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
           <div className="p-6 shadow-lg rounded-lg border-l-4 border-indigo-600 bg-indigo-50">
