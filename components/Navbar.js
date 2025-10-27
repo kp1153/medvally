@@ -37,7 +37,7 @@ export default function Navbar() {
         style={{ position: "absolute", opacity: 0, zIndex: -1 }}
       />
 
-      <nav className="bg-white border-b shadow-sm sticky top-0 z-50">
+      <nav className="bg-white border-b shadow-sm">
         <div className="flex flex-col sm:flex-row items-center justify-between px-6 py-5">
           {/* Logo Section */}
           <div className="flex items-center gap-4">
@@ -54,58 +54,6 @@ export default function Navbar() {
                 International Healthcare, Indian Hospitality
               </p>
             </div>
-          </div>
-
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center gap-6">
-            <a
-              href="#home"
-              className="text-gray-700 hover:text-indigo-600 font-medium"
-            >
-              Home
-            </a>
-            <a
-              href="#about"
-              className="text-gray-700 hover:text-indigo-600 font-medium"
-            >
-              About Us
-            </a>
-            <a
-              href="#treatments"
-              className="text-gray-700 hover:text-indigo-600 font-medium"
-            >
-              Treatments
-            </a>
-            <a
-              href="#hospitals"
-              className="text-gray-700 hover:text-indigo-600 font-medium"
-            >
-              Hospitals
-            </a>
-            <a
-              href="#patient-stories"
-              className="text-gray-700 hover:text-indigo-600 font-medium"
-            >
-              Success Stories
-            </a>
-            <a
-              href="#health-tips"
-              className="text-gray-700 hover:text-indigo-600 font-medium"
-            >
-              Health Tips
-            </a>
-            <a
-              href="#cost"
-              className="text-gray-700 hover:text-indigo-600 font-medium"
-            >
-              Cost Estimate
-            </a>
-            <a
-              href="#contact"
-              className="text-gray-700 hover:text-indigo-600 font-medium"
-            >
-              Contact
-            </a>
           </div>
 
           {/* Translation & WhatsApp Section */}
@@ -139,10 +87,10 @@ export default function Navbar() {
               WhatsApp Us
             </Link>
 
-            {/* Mobile Menu Toggle */}
+            {/* Hamburger Menu Button */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="lg:hidden text-gray-700 focus:outline-none"
+              className="text-gray-700 focus:outline-none"
             >
               <svg
                 className="w-6 h-6"
@@ -161,9 +109,9 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile/All Size Menu */}
         {menuOpen && (
-          <div className="lg:hidden bg-gray-50 border-t">
+          <div className="bg-gray-50 border-t">
             <div className="flex flex-col px-6 py-4 space-y-3">
               <a
                 href="#home"

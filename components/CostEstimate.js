@@ -1,12 +1,8 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import emailjs from '@emailjs/browser';
+import { useState } from "react";
 
-const SERVICE_ID = 'service_fefinkv';
-const TEMPLATE_ID = 'template_t2ry7vg';
-const PUBLIC_KEY = 'yF3fvDRlO8cZIj5-V';
-const ADMIN_WA = '+919523534038';
+const ADMIN_WA = "+919523534038";
 
 export default function CostEstimate() {
   const [loading, setLoading] = useState(false);
@@ -21,36 +17,42 @@ export default function CostEstimate() {
     const name = form.name.value.trim();
     const email = form.email.value.trim();
     const phone = form.phone.value.trim();
-    const country = form.country ? form.country.value.trim() : '';
+    const country = form.country ? form.country.value.trim() : "";
     const treatment = form.treatment.value;
     const message = form.message.value.trim();
 
-    const templateParams = {
-      name,
-      phone,
-      email,
-      country,
-      treatment,
-      message,
-      source: 'Website CostEstimate'
-    };
-
     try {
-      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          country,
+          treatment,
+          message,
+          source: "Website CostEstimate",
+        }),
+      });
+
+      if (!res.ok) throw new Error("Failed to save");
 
       const waText = encodeURIComponent(
         `New Cost Estimate Request\n\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nCountry: ${country}\nTreatment: ${treatment}\n\nMessage: ${message}`
       );
-      const waUrl = `https://wa.me/${ADMIN_WA.replace(/^\+/, '')}?text=${waText}`;
+      const waUrl = `https://wa.me/${ADMIN_WA.replace(/^\+/, "")}?text=${waText}`;
 
-      setSuccess('Estimate request sent. Our team will contact you shortly.');
+      setSuccess("Estimate request sent. Our team will contact you shortly.");
       setLoading(false);
 
-      window.open(waUrl, '_blank');
+      window.open(waUrl, "_blank");
       form.reset();
     } catch (err) {
-      console.error('EmailJS error', err);
-      setSuccess('Could not send request. Please email medvalleypvtltd@gmail.com directly.');
+      console.error("Save error", err);
+      setSuccess(
+        "Could not send request. Please email medvalleypvtltd@gmail.com directly."
+      );
       setLoading(false);
     }
   };
@@ -58,22 +60,58 @@ export default function CostEstimate() {
   return (
     <section id="cost" className="py-16 px-6 bg-gray-50">
       <div className="max-w-5xl mx-auto text-center">
-        <h2 className="text-3xl font-bold text-pink-700 mb-6">Get a Free Cost Estimate</h2>
+        <h2 className="text-3xl font-bold text-pink-700 mb-6">
+          Get a Free Cost Estimate
+        </h2>
         <p className="text-gray-700 mb-10">
-          Fill in your details below and our team will get back with an accurate medical treatment estimate in India.
+          Fill in your details below and our team will get back with an accurate
+          medical treatment estimate in India.
         </p>
 
-        <form onSubmit={handleSubmit} className="grid gap-4 max-w-xl mx-auto text-left">
-          <input name="name" type="text" placeholder="Full Name" required className="border rounded-lg p-3 w-full focus:ring-2 focus:ring-pink-500" />
+        <form
+          onSubmit={handleSubmit}
+          className="grid gap-4 max-w-xl mx-auto text-left"
+        >
+          <input
+            name="name"
+            type="text"
+            placeholder="Full Name"
+            required
+            className="border rounded-lg p-3 w-full focus:ring-2 focus:ring-pink-500"
+          />
 
-          <input name="email" type="email" placeholder="Email Address" required className="border rounded-lg p-3 w-full focus:ring-2 focus:ring-pink-500" />
+          <input
+            name="email"
+            type="email"
+            placeholder="Email Address"
+            required
+            className="border rounded-lg p-3 w-full focus:ring-2 focus:ring-pink-500"
+          />
 
-          <input name="phone" type="tel" placeholder="Phone / WhatsApp Number" required className="border rounded-lg p-3 w-full focus:ring-2 focus:ring-pink-500" />
+          <input
+            name="phone"
+            type="tel"
+            placeholder="Phone / WhatsApp Number"
+            required
+            className="border rounded-lg p-3 w-full focus:ring-2 focus:ring-pink-500"
+          />
 
-          <input name="country" type="text" placeholder="Country" className="border rounded-lg p-3 w-full focus:ring-2 focus:ring-pink-500" />
+          <input
+            name="country"
+            type="text"
+            placeholder="Country"
+            className="border rounded-lg p-3 w-full focus:ring-2 focus:ring-pink-500"
+          />
 
-          <select name="treatment" required className="border rounded-lg p-3 w-full focus:ring-2 focus:ring-pink-500" defaultValue="">
-            <option value="" disabled>Select Treatment</option>
+          <select
+            name="treatment"
+            required
+            className="border rounded-lg p-3 w-full focus:ring-2 focus:ring-pink-500"
+            defaultValue=""
+          >
+            <option value="" disabled>
+              Select Treatment
+            </option>
             <option>Heart Surgery</option>
             <option>Kidney Transplant</option>
             <option>Liver Transplant</option>
@@ -86,10 +124,18 @@ export default function CostEstimate() {
             <option>Other</option>
           </select>
 
-          <textarea name="message" placeholder="Describe Your Medical Need" className="border rounded-lg p-3 w-full focus:ring-2 focus:ring-pink-500 h-32"></textarea>
+          <textarea
+            name="message"
+            placeholder="Describe Your Medical Need"
+            className="border rounded-lg p-3 w-full focus:ring-2 focus:ring-pink-500 h-32"
+          ></textarea>
 
-          <button type="submit" disabled={loading} className="mt-3 bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg font-semibold shadow-md">
-            {loading ? 'Sending...' : 'Get Estimate'}
+          <button
+            type="submit"
+            disabled={loading}
+            className="mt-3 bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg font-semibold shadow-md"
+          >
+            {loading ? "Sending..." : "Get Estimate"}
           </button>
         </form>
 
