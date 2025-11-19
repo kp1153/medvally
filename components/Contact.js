@@ -1,3 +1,4 @@
+```javascript
 "use client";
 
 import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
@@ -20,11 +21,19 @@ export default function Contact() {
     },
     {
       icon: MapPin,
-      title: "Address",
+      title: "India Office",
       value:
         "8A/5A, 2nd Floor, Gandhi Park Lane, Hauz Rani, Malviya Nagar, Delhi 110017",
       link: null,
       color: "from-purple-500 to-pink-600",
+    },
+    {
+      icon: MapPin,
+      title: "Uzbekistan Office",
+      value:
+        "Toshkent Shahar, Yashnobod Tumani, Magtymguly Kuchasi, 93/3Y, Uzbekistan",
+      link: null,
+      color: "from-orange-500 to-red-600",
     },
   ];
 
@@ -39,7 +48,7 @@ export default function Contact() {
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="max-w-5xl mx-auto relative z-10">
+      <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-block mb-4">
@@ -57,7 +66,7 @@ export default function Contact() {
         </div>
 
         {/* Contact Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {contactInfo.map((item, idx) => {
             const Icon = item.icon;
             return (
@@ -77,7 +86,7 @@ export default function Contact() {
                   {item.title}
                 </h3>
                 {item.link ? (
-                  <a
+                  
                     href={item.link}
                     target={item.link.startsWith("http") ? "_blank" : undefined}
                     rel={
@@ -115,7 +124,7 @@ export default function Contact() {
                 </p>
               </div>
             </div>
-            <a
+            
               href="https://wa.me/919523534038"
               target="_blank"
               rel="noopener noreferrer"
