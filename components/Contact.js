@@ -1,4 +1,3 @@
-```javascript
 "use client";
 
 import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
@@ -85,8 +84,10 @@ export default function Contact() {
                 <h3 className="text-lg font-bold text-gray-800 mb-2">
                   {item.title}
                 </h3>
+
+                {/* FIX 1: Added <a> tag start below */}
                 {item.link ? (
-                  
+                  <a
                     href={item.link}
                     target={item.link.startsWith("http") ? "_blank" : undefined}
                     rel={
@@ -124,7 +125,9 @@ export default function Contact() {
                 </p>
               </div>
             </div>
-            
+
+            {/* FIX 2: Added <a> tag start below */}
+            <a
               href="https://wa.me/919523534038"
               target="_blank"
               rel="noopener noreferrer"
@@ -136,15 +139,15 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* Map Embed (Optional) */}
+        {/* Map Embed */}
         <div className="bg-white rounded-3xl shadow-2xl p-4 border border-gray-100 overflow-hidden">
           <div className="aspect-video rounded-2xl overflow-hidden bg-gray-100">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3505.0946989876547!2d77.18906857550281!3d28.53424378744883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce21d7f00001f%3A0x0!2zMjjCsDMyJzAzLjMiTiA3N8KwMTEnMjguMiJF!5e0!3m2!1sen!2sin!4v1234567890"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3504.836760075507!2d77.2167!3d28.5444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDMyJzM5LjgiTiA3N8KwMTMnMDAuMSJF!5e0!3m2!1sen!2sin!4v1632000000000!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0 }}
-              allowFullScreen=""
+              allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               className="rounded-2xl"
