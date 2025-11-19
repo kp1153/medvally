@@ -91,7 +91,8 @@ export default function Footer() {
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  
+                  {/* FIX 1: Added opening <a> tag */}
+                  <a
                     href={link.href}
                     className="text-indigo-200 hover:text-white transition-colors text-sm flex items-center gap-2 group"
                   >
@@ -109,7 +110,8 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-3 text-indigo-200">
                 <Phone className="w-4 h-4 mt-0.5 flex-shrink-0 text-teal-400" />
-                
+                {/* FIX 2: Added opening <a> tag for Phone */}
+                <a
                   href="https://wa.me/919523534038"
                   className="hover:text-white transition-colors"
                 >
@@ -118,7 +120,8 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-3 text-indigo-200">
                 <Mail className="w-4 h-4 mt-0.5 flex-shrink-0 text-teal-400" />
-                
+                {/* FIX 3: Added opening <a> tag for Email */}
+                <a
                   href="mailto:medvalleypvtltd@gmail.com"
                   className="hover:text-white transition-colors break-all"
                 >
@@ -130,12 +133,15 @@ export default function Footer() {
                 <div className="leading-relaxed">
                   <p className="font-semibold text-white mb-1">India Office:</p>
                   <p className="mb-3">
-                    8A/5A, 2nd Floor, Gandhi Park Lane, Hauz Rani, Malviya Nagar,
-                    Delhi 110017
+                    8A/5A, 2nd Floor, Gandhi Park Lane, Hauz Rani, Malviya
+                    Nagar, Delhi 110017
                   </p>
-                  <p className="font-semibold text-white mb-1">Uzbekistan Office:</p>
+                  <p className="font-semibold text-white mb-1">
+                    Uzbekistan Office:
+                  </p>
                   <p>
-                    Toshkent Shahar, Yashnobod Tumani, Magtymguly Kuchasi, 93/3Y, Uzbekistan
+                    Toshkent Shahar, Yashnobod Tumani, Magtymguly Kuchasi,
+                    93/3Y, Uzbekistan
                   </p>
                 </div>
               </li>
@@ -149,7 +155,8 @@ export default function Footer() {
               {socialLinks.map((social) => {
                 const Icon = social.icon;
                 return (
-                  
+                  /* FIX 4: Added opening <a> tag for Social Links */
+                  <a
                     key={social.name}
                     href={social.url}
                     target="_blank"
@@ -164,7 +171,8 @@ export default function Footer() {
             </div>
 
             {/* WhatsApp CTA */}
-            
+            {/* FIX 5: Added opening <a> tag for WhatsApp Button */}
+            <a
               href="https://wa.me/919523534038"
               target="_blank"
               rel="noopener noreferrer"
@@ -188,8 +196,8 @@ export default function Footer() {
               </p>
             </div>
 
-            
-              <a href="https://www.web-developer-kp.com"
+            <a
+              href="https://www.web-developer-kp.com"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 bg-white/5 backdrop-blur-sm hover:bg-white/10 px-4 py-2 rounded-lg transition-all duration-300 group"
