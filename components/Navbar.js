@@ -55,7 +55,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           {/* Desktop: Logo + Actions Row */}
           <div className="hidden lg:block">
-            <div className="flex items-center justify-between py-6">
+            <div className="flex items-center justify-between py-10">
               {/* Left: WhatsApp */}
               <a
                 href="https://wa.me/919523534038"
@@ -69,7 +69,7 @@ export default function Navbar() {
 
               {/* Center: Logo */}
               <div className="absolute left-1/2 transform -translate-x-1/2">
-                <div className="relative w-80 h-40">
+                <div className="relative w-96 h-44">
                   <Image
                     src="/logo.jpg"
                     alt="MedValley - Healing Starts Here"
@@ -109,8 +109,8 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Desktop: Menu Links Row (Second Line) - Always Visible */}
-          <div className="hidden lg:flex items-center justify-center gap-1 py-4 border-t border-gray-100">
+          {/* Desktop: Menu Links Row */}
+          <div className="hidden lg:flex items-center justify-center gap-1 py-6 border-t border-gray-100 mt-4">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -188,7 +188,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Menu Dropdown (Hamburger) */}
+        {/* Mobile Menu Dropdown */}
         <div
           className={`lg:hidden overflow-hidden transition-all duration-300 ${
             menuOpen ? "max-h-[600px] border-t" : "max-h-0"
