@@ -123,36 +123,61 @@ export default function Navbar() {
           </div>
 
           {/* Mobile: Logo + Actions Row */}
-          <div className="flex lg:hidden items-center justify-between py-4">
-            {/* Left: Language + Translate */}
-            <div className="flex items-center gap-2">
-              <div className="flex items-center gap-1 bg-gray-50 rounded-lg px-2 py-1.5">
-                <Languages className="w-4 h-4 text-indigo-600" />
-                <select
-                  value={selectedLang}
-                  onChange={(e) => setSelectedLang(e.target.value)}
-                  className="bg-transparent text-xs font-medium text-gray-700 focus:outline-none"
+          <div className="lg:hidden">
+            {/* Top Row: Actions */}
+            <div className="flex items-center justify-between py-3">
+              {/* Left: Language + Translate */}
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1 bg-gray-50 rounded-lg px-2 py-1.5">
+                  <Languages className="w-4 h-4 text-indigo-600" />
+                  <select
+                    value={selectedLang}
+                    onChange={(e) => setSelectedLang(e.target.value)}
+                    className="bg-transparent text-xs font-medium text-gray-700 focus:outline-none"
+                  >
+                    <option value="en">EN</option>
+                    <option value="ar">AR</option>
+                    <option value="ru">RU</option>
+                    <option value="fr">FR</option>
+                    <option value="bn">BN</option>
+                    <option value="fa">FA</option>
+                  </select>
+                </div>
+
+                <button
+                  disabled={!widgetReady}
+                  onClick={handleTranslate}
+                  className="bg-indigo-500 hover:bg-indigo-600 disabled:bg-gray-300 text-white px-3 py-1.5 rounded-lg text-xs font-medium"
                 >
-                  <option value="en">EN</option>
-                  <option value="ar">AR</option>
-                  <option value="ru">RU</option>
-                  <option value="fr">FR</option>
-                  <option value="bn">BN</option>
-                  <option value="fa">FA</option>
-                </select>
+                  Translate
+                </button>
               </div>
 
-              <button
-                disabled={!widgetReady}
-                onClick={handleTranslate}
-                className="bg-indigo-500 hover:bg-indigo-600 disabled:bg-gray-300 text-white px-3 py-1.5 rounded-lg text-xs font-medium"
-              >
-                Translate
-              </button>
+              {/* Right: WhatsApp + Hamburger */}
+              <div className="flex items-center gap-2">
+                <a
+                  href="https://wa.me/919523534038"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-3 py-1.5 rounded-lg text-xs font-semibold"
+                >
+                  <Phone className="w-4 h-4" />
+                </a>
+                <button
+                  onClick={() => setMenuOpen(!menuOpen)}
+                  className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                >
+                  {menuOpen ? (
+                    <X className="w-6 h-6 text-gray-700" />
+                  ) : (
+                    <Menu className="w-6 h-6 text-gray-700" />
+                  )}
+                </button>
+              </div>
             </div>
 
-            {/* Center: Logo */}
-            <div className="absolute left-1/2 transform -translate-x-1/2">
+            {/* Bottom Row: Logo centered */}
+            <div className="flex justify-center pb-3">
               <div className="relative w-32 h-16 sm:w-40 sm:h-20">
                 <Image
                   src="/logo.jpg"
@@ -162,28 +187,6 @@ export default function Navbar() {
                   priority
                 />
               </div>
-            </div>
-
-            {/* Right: WhatsApp + Hamburger */}
-            <div className="flex items-center gap-2">
-              <a
-                href="https://wa.me/919523534038"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-3 py-1.5 rounded-lg text-xs font-semibold"
-              >
-                <Phone className="w-4 h-4" />
-              </a>
-              <button
-                onClick={() => setMenuOpen(!menuOpen)}
-                className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
-              >
-                {menuOpen ? (
-                  <X className="w-6 h-6 text-gray-700" />
-                ) : (
-                  <Menu className="w-6 h-6 text-gray-700" />
-                )}
-              </button>
             </div>
           </div>
         </div>
