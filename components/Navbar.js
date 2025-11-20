@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Menu, X, Phone, Languages } from "lucide-react";
+import Image from "next/image";
 
 export default function Navbar() {
   const [selectedLang, setSelectedLang] = useState("en");
@@ -50,59 +51,37 @@ export default function Navbar() {
         style={{ position: "absolute", opacity: 0, zIndex: -1 }}
       />
 
-      <nav className="bg-white border-b border-gray-100">
+      <nav className="bg-white border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          {/* First Line - Logo Only */}
-          <div className="flex items-center justify-center py-6 border-b border-gray-100">
-            <div className="group cursor-pointer">
-              <div className="relative">
-                {/* Logo Card */}
-                <div className="bg-blue-900 rounded-2xl p-6 sm:p-8 shadow-2xl transform transition-all duration-500 hover:scale-105 hover:shadow-3xl">
-                  {/* Arabic Text */}
-                  <div className="text-center mb-1">
-                    <h1
-                      className="text-white text-3xl sm:text-4xl md:text-5xl font-bold"
-                      style={{ fontFamily: "serif", direction: "rtl" }}
-                    >
-                      ميڊ ويلي
-                    </h1>
-                  </div>
+          {/* Desktop: Logo + Actions Row */}
+          <div className="hidden lg:flex items-center justify-between py-6 min-h-[180px]">
+            {/* Left: WhatsApp */}
+            <a
+              href="https://wa.me/919523534038"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+            >
+              <Phone className="w-4 h-4" />
+              WhatsApp
+            </a>
 
-                  {/* English Text */}
-                  <div className="text-center mb-2">
-                    <h2 className="text-yellow-300 text-2xl sm:text-3xl md:text-4xl font-bold tracking-wide">
-                      MedValley
-                    </h2>
-                  </div>
-
-                  {/* Decorative Line */}
-                  <div className="flex items-center justify-center gap-2 mb-2">
-                    <div className="h-1 flex-1 bg-yellow-300 rounded"></div>
-                    <div className="w-2 h-2 bg-yellow-300 rounded-full"></div>
-                    <div className="h-1 flex-1 bg-yellow-300 rounded"></div>
-                  </div>
-
-                  {/* Tagline */}
-                  <div className="text-center">
-                    <p className="text-yellow-300 text-[10px] sm:text-xs font-semibold tracking-widest uppercase">
-                      Healing Starts Here
-                    </p>
-                  </div>
-                </div>
-
-                {/* Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-500 rounded-2xl opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500 -z-10"></div>
+            {/* Center: Logo */}
+            <div className="absolute left-1/2 transform -translate-x-1/2">
+              <div className="relative w-80 h-40">
+                <Image
+                  src="/logo.jpg"
+                  alt="MedValley - Healing Starts Here"
+                  fill
+                  className="object-contain"
+                  priority
+                />
               </div>
             </div>
-          </div>
 
-          {/* Second Line - Only Actions + Hamburger */}
-          <div className="flex items-center justify-between h-16">
-            <div></div>
-
+            {/* Right: Language + Translate */}
             <div className="flex items-center gap-3">
-              {/* Language Selector */}
-              <div className="hidden sm:flex items-center gap-2 bg-gray-50 rounded-lg px-3 py-2">
+              <div className="flex items-center gap-2 bg-gray-50 rounded-lg px-3 py-2">
                 <Languages className="w-4 h-4 text-indigo-600" />
                 <select
                   value={selectedLang}
@@ -121,23 +100,78 @@ export default function Navbar() {
               <button
                 disabled={!widgetReady}
                 onClick={handleTranslate}
-                className="hidden sm:block bg-indigo-500 hover:bg-indigo-600 disabled:bg-gray-300 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md hover:shadow-lg transition-all duration-300"
+                className="bg-indigo-500 hover:bg-indigo-600 disabled:bg-gray-300 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md hover:shadow-lg transition-all duration-300"
               >
                 Translate
               </button>
+            </div>
+          </div>
 
-              {/* WhatsApp Button */}
+          {/* Desktop: Menu Links Row */}
+          <div className="hidden lg:flex items-center justify-center gap-1 py-3 border-t border-gray-100 mt-4">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Mobile: Logo + Actions Row */}
+          <div className="flex lg:hidden items-center justify-between py-4">
+            {/* Left: Language + Translate */}
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1 bg-gray-50 rounded-lg px-2 py-1.5">
+                <Languages className="w-4 h-4 text-indigo-600" />
+                <select
+                  value={selectedLang}
+                  onChange={(e) => setSelectedLang(e.target.value)}
+                  className="bg-transparent text-xs font-medium text-gray-700 focus:outline-none"
+                >
+                  <option value="en">EN</option>
+                  <option value="ar">AR</option>
+                  <option value="ru">RU</option>
+                  <option value="fr">FR</option>
+                  <option value="bn">BN</option>
+                  <option value="fa">FA</option>
+                </select>
+              </div>
+
+              <button
+                disabled={!widgetReady}
+                onClick={handleTranslate}
+                className="bg-indigo-500 hover:bg-indigo-600 disabled:bg-gray-300 text-white px-3 py-1.5 rounded-lg text-xs font-medium"
+              >
+                Translate
+              </button>
+            </div>
+
+            {/* Center: Logo */}
+            <div className="absolute left-1/2 transform -translate-x-1/2">
+              <div className="relative w-32 h-16 sm:w-40 sm:h-20">
+                <Image
+                  src="/logo.jpg"
+                  alt="MedValley"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </div>
+
+            {/* Right: WhatsApp + Hamburger */}
+            <div className="flex items-center gap-2">
               <a
                 href="https://wa.me/919523534038"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden sm:flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+                className="flex items-center gap-1 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-3 py-1.5 rounded-lg text-xs font-semibold"
               >
                 <Phone className="w-4 h-4" />
-                WhatsApp
               </a>
-
-              {/* Hamburger Menu Button */}
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
                 className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
@@ -152,9 +186,9 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Hamburger Menu Dropdown */}
+        {/* Mobile Menu Dropdown */}
         <div
-          className={`overflow-hidden transition-all duration-300 ${
+          className={`lg:hidden overflow-hidden transition-all duration-300 ${
             menuOpen ? "max-h-[600px] border-t" : "max-h-0"
           }`}
         >
@@ -169,42 +203,6 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
-
-            <div className="pt-4 space-y-3 border-t">
-              <div className="flex items-center gap-2 px-4">
-                <Languages className="w-4 h-4 text-indigo-600" />
-                <select
-                  value={selectedLang}
-                  onChange={(e) => setSelectedLang(e.target.value)}
-                  className="flex-1 bg-gray-50 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 focus:outline-none"
-                >
-                  <option value="en">English</option>
-                  <option value="ar">Arabic</option>
-                  <option value="ru">Russian</option>
-                  <option value="fr">French</option>
-                  <option value="bn">Bengali</option>
-                  <option value="fa">Persian</option>
-                </select>
-              </div>
-
-              <button
-                disabled={!widgetReady}
-                onClick={handleTranslate}
-                className="w-full bg-indigo-500 hover:bg-indigo-600 disabled:bg-gray-300 text-white px-4 py-3 rounded-lg text-sm font-medium transition-colors"
-              >
-                Translate
-              </button>
-
-              <a
-                href="https://wa.me/919523534038"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-3 rounded-lg text-sm font-semibold"
-              >
-                <Phone className="w-4 h-4" />
-                WhatsApp Us
-              </a>
-            </div>
           </div>
         </div>
       </nav>
